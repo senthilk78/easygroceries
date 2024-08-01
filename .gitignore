@@ -5,3 +5,7 @@
 /node_modules
 bin
 obj
+/.vs/easygroceries/DesignTimeBuild
+/.vs/easygroceries/FileContentIndex
+/.vs/easygroceries/v17
+/.vs

@@ -23,10 +23,10 @@ public class CatalogInitialData :DbContext
                 {
                     //Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
                     Id = 1,
-                    Title = "IPhone X",
-                    Price = 950.00M,
+                    Name = "Milk",
+                    Price = 4.99,
                     //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
-                    Thumbnail="https://localhost:5173/public/img/milk.jpg",
+                    pictureUrl="/public/img/milk.jpg",
                     Image = "https://localhost:5173/public/img/milk.jpg",
                     //Category = new List<string> { "Smart Phone" }
                     Quantity=10
@@ -35,15 +35,110 @@ public class CatalogInitialData :DbContext
                 {
                     //Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
                     Id=2,
-                    Title = "Samsung 10",
-                    Price = 840.00M,
+                    Name = "Bread",
+                    Price = 4.99,
                     //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
-                    Thumbnail="/public/img/milk.jpg",
+                    pictureUrl="/public/img/bread.jpg",
+                    Image = "product-2.png",
+                    //Category = new List<string> { "Smart Phone" }
+                    Quantity=15
+                },
+                new Product()
+                {
+                    //Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
+                    Id = 3,
+                    Name = "Eggs",
+                    Price = 5.79,
+                    //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    pictureUrl="/public/img/eggs.jpg",
+                    Image = "https://localhost:5173/public/img/milk.jpg",
+                    //Category = new List<string> { "Smart Phone" }
+                    Quantity=10
+                },
+                new Product()
+                {
+                    //Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
+                    Id=4,
+                    Name = "Apple",
+                    Price = 5.49,
+                    //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    pictureUrl="/public/img/apple.jpg",
+                    Image = "product-2.png",
+                    //Category = new List<string> { "Smart Phone" }
+                    Quantity=15
+                },
+                new Product()
+                {
+                    //Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
+                    Id = 5,
+                    Name = "atta",
+                    Price = 2.99,
+                    //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    pictureUrl="/public/img/eggs.jpg",
+                    Image = "https://localhost:5173/public/img/milk.jpg",
+                    //Category = new List<string> { "Smart Phone" }
+                    Quantity=10
+                },
+                new Product()
+                {
+                    //Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
+                    Id=6,
+                    Name = "Onion",
+                    Price = 12.99,
+                    //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    pictureUrl="/public/img/onion.jpg",
+                    Image = "product-2.png",
+                    //Category = new List<string> { "Smart Phone" }
+                    Quantity=15
+                },
+                new Product()
+                {
+                    //Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
+                    Id = 7,
+                    Name = "Peas",
+                    Price = 3.29,
+                    //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    pictureUrl="/public/img/peas.jpg",
+                    Image = "https://localhost:5173/public/img/milk.jpg",
+                    //Category = new List<string> { "Smart Phone" }
+                    Quantity=10
+                },
+                new Product()
+                {
+                    //Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
+                    Id=8,
+                    Name = "Rice",
+                    Price = 4.99,
+                    //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    pictureUrl="/public/img/rice.jpg",
+                    Image = "product-2.png",
+                    //Category = new List<string> { "Smart Phone" }
+                    Quantity=15
+                },
+                new Product()
+                {
+                    //Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
+                    Id = 9,
+                    Name = "Sugar",
+                    Price = 3.19,
+                    //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    pictureUrl="/public/img/sugar.jpg",
+                    Image = "https://localhost:5173/public/img/milk.jpg",
+                    //Category = new List<string> { "Smart Phone" }
+                    Quantity=10
+                },
+                new Product()
+                {
+                    //Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
+                    Id=10,
+                    Name = "Tomato",
+                    Price = 2.99,
+                    //Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    pictureUrl="/public/img/tomato.jpg",
                     Image = "product-2.png",
                     //Category = new List<string> { "Smart Phone" }
                     Quantity=15
                 }
-                //,
                 //new Product()
                 //{
                 //    Id = new Guid("4f136e9f-ff8c-4c1f-9a33-d12f689bdab8"),

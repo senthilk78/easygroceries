@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from 'react'
-//import useLocalStorageState from 'use-local-storage-state'
+import useLocalStorageState from 'use-local-storage-state'
 
-//import { CurrencyFormatter } from '../CurrencyFormatter'
+import { CurrencyFormatter } from '../CurrencyFormatter'
 import classes from './products.module.scss'
 //import { Loader } from '../Loader'
 
@@ -25,7 +25,7 @@ export const Products: FunctionComponent = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [products, setProducts] = useState<Product[]>([])
     const [error, setError] = useState(false)
-    //const [cart, setCart] = useLocalStorageState<CartProps>('cart', {})
+    const [cart, setCart] = useLocalStorageState<CartProps>('cart', {})
 
 
     useEffect(() => {
@@ -50,16 +50,16 @@ export const Products: FunctionComponent = () => {
         }
     }
 
-    //const addToCart = (product: Product): void => {
-    //    product.quantity = 1
+    const addToCart = (product: Product): void => {
+        product.quantity = 1
 
-    //    setCart((prevCart) => ({
-    //        ...prevCart,
-    //        [product.id]: product,
-    //    }))
-    //}
+        setCart((prevCart) => ({
+            ...prevCart,
+            [product.id]: product,
+        }))
+    }
 
-//    const isInCart = (productId: number): boolean => Object.keys(cart || {}).includes(productId.toString())
+    const isInCart = (productId: number): boolean => Object.keys(cart || {}).includes(productId.toString())
 
     if (error) {
         return <h3 className={classes.error}>An error occurred when fetching data. Please check the API and try again.</h3>
@@ -79,6 +79,8 @@ export const Products: FunctionComponent = () => {
                     <div className={classes.product} key={product.id}>
                         <img src={product.thumbnail} alt={product.title} />
                         <h3>{product.title}</h3>
+                        <p>Price: <CurrencyFormatter amount={product.price} /></p>
+                        <button disabled={isInCart(product.id)} onClick={() => addToCart(product)}>Add to Cart</button>
                     </div>
                 ))}
             </div>
