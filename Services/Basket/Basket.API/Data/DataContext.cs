@@ -6,6 +6,7 @@ namespace Basket.API.Data
         public DataContext(DbContextOptions<DataContext> options)
         : base(options) {
         }
-        public DbSet<ShoppingCartItem> SCart { get; set; }
+        public DbSet<ShoppingCartItem> SCartItem { get; set; }
+        public DbSet<ShoppingCart> SCart { get; set; }
     }
 }

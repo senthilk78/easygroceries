@@ -12,8 +12,8 @@ public class InitialData :DbContext
         this.DBData = DBData;
         if (!this.DBData.SCart.Any())
         {
-            this.DBData.SCart.AddRange(GetPreconfiguredProducts().ToList<ShoppingCartItem>());
-            this.DBData.SaveChanges();
+            //this.DBData.SCart.AddRange(GetPreconfiguredProducts().ToList<ShoppingCartItem>());
+            //this.DBData.SaveChanges();
         }
     }
 

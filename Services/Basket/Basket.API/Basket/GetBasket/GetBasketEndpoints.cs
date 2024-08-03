@@ -1,16 +1,18 @@
-﻿namespace Basket.API.Basket.GetBasket;
+﻿using Basket.API.Basket.Dto;
 
-public record GetBasketRequest(int? Count = 1); 
-public record GetBasketResponse(IEnumerable<ShoppingCartItem> SCart);
+namespace Basket.API.Basket.GetBasket;
+
+public record GetBasketRequest(); 
+public record GetBasketResponse(BasketDto ShoppingCart);
 
 public class GetBasketEndpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/basket/all", async ([AsParameters] GetBasketRequest request, ISender sender) =>
+        app.MapGet("/basket/{userName}", async (string userName, ISender sender) =>
         {
-            var query = request.Adapt<GetBasketQuery>();
-            var result = await sender.Send(query);
+            //var query = request.Adapt<GetBasketQuery>();
+            var result = await sender.Send(new GetBasketQuery(userName));
 
             var response = result.Adapt<GetBasketResponse>();
 

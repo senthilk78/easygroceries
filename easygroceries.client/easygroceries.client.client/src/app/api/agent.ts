@@ -1,10 +1,14 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
+import { Product } from "../models/product";
+import { BasketItem } from "../../app/models/basket";
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500))
 
-axios.defaults.baseURL = 'https://localhost:7089/';
+//axios.defaults.baseURL = 'https://localhost:7089/';
+const catlogBaseURL = 'https://localhost:7089/';
+const basketBaseURL = 'https://localhost:60668/';
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -46,7 +50,7 @@ const requests = {
 }
 
 const Catalog = {
-    list: () => requests.get('products'),
+    list: () => requests.get(catlogBaseURL+'products'),
     details: (id: number) => requests.get(`products/${id}`)
 }
 
@@ -59,8 +63,11 @@ const TestErrors = {
 }
 
 const Basket = {
-    get: () => requests.get('basket'),
-    addItem: (productId: number, quantity = 1) => requests.post(`basket?productId=${productId}&quantity=${quantity}`, {}),
+    get: () => requests.get(basketBaseURL+'basket/skuser'),
+    //addItem: (productId: number, quantity = 1) => requests.post(basketBaseURL+`basket/${productId}/${quantity}`, {}),
+    //addItem: (product: Product) => requests.post(basketBaseURL + 'basket/all', { product }),
+    addItem: (basketitem: BasketItem) => requests.post(basketBaseURL + 'basket/add',  basketitem ),
+    //addItem: (productId: number, quantity = 1) => requests.post(`basket?productId=${productId}&quantity=${quantity}`, {}),
     removeItem: (productId: number, quantity = 1) => requests.del(`basket?productId=${productId}&quantity=${quantity}`)
 }
 
