@@ -1,25 +1,38 @@
 import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { Add, Delete, Remove } from '@mui/icons-material';
 import { useStoreContext } from '../../app/context/StoreContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import agent from '../../app/api/agent';
 import { LoadingButton } from '@mui/lab';
 import BasketSummary from './BasketSummary';
 import { Link } from 'react-router-dom';
+import LoadingComponent from '../../app/layout/LoadingComponent';
+import { BasketItem } from "../../app/models/basket";
 
 export default function BasketPage() {
+    const [loading, setLoading] = useState(true);
     const { basket, setBasket, removeItem } = useStoreContext();
     const [status, setStatus] = useState({
         loading: false,
         name: ''
     });
+    useEffect(() => {
+        agent.Basket.get()
+            .then(data => {
+                setBasket(data.shoppingCart)
+            })
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false));
+    }, [])
 
-    function handleAddItem(productId: number, name: string) {
+    function handleAddItem(basketitem: BasketItem, name: string) {
         setStatus({ loading: true, name });
-        agent.Basket.addItem(productId)
+        basketitem.quantity = 1
+        agent.Basket.addItem(basketitem)
             .then(basket => setBasket(basket))
             .catch(error => console.log(error))
             .finally(() => setStatus({ loading: false, name: '' }))
+        
     }
 
     function handleRemoveItem(productId: number, quantity = 1, name: string) {
@@ -29,6 +42,7 @@ export default function BasketPage() {
             .catch(error => console.log(error))
             .finally(() => setStatus({ loading: false, name: '' }))
     }
+    if (loading) return <LoadingComponent message='Loading products...' />
 
     if (!basket) return <Typography variant="h3">Your basket is empty</Typography>
 
@@ -57,7 +71,7 @@ export default function BasketPage() {
                                         <span>{item.name}</span>
                                     </Box>
                                 </TableCell>
-                                <TableCell align="right">${(item.price / 100).toFixed(2)}</TableCell>
+                                <TableCell align="right">${(item.price).toFixed(2)}</TableCell>
                                 <TableCell align="center">
                                     <LoadingButton
                                         color='error'
@@ -69,13 +83,13 @@ export default function BasketPage() {
                                     {item.quantity}
                                     <LoadingButton
                                         loading={status.loading && status.name === 'add' + item.productId}
-                                        onClick={() => handleAddItem(item.productId, 'add' + item.productId)}
+                                        onClick={() => handleAddItem(item, 'add' + item.productId)}
                                         color='secondary'
                                     >
                                         <Add />
                                     </LoadingButton>
                                 </TableCell>
-                                <TableCell align="right">${((item.price / 100) * item.quantity).toFixed(2)}</TableCell>
+                                <TableCell align="right">${((item.price) * item.quantity).toFixed(2)}</TableCell>
                                 <TableCell align="right">
                                     <LoadingButton
                                         loading={status.loading && status.name === 'del' + item.productId}

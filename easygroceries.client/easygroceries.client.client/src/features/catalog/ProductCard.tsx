@@ -28,7 +28,7 @@ export default function ProductCard({ product }: Props) {
             pictureUrl: product.pictureUrl,
             brand: "",
             type: "",
-            quantity: 5
+            quantity: 1
         };
         agent.Basket.addItem(basketitem)
             .then(basket => setBasket(basket))

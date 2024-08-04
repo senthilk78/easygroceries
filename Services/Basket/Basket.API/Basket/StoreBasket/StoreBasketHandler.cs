@@ -20,25 +20,32 @@ public class StoreBasketCommandHandler
     public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
     {
         //await DeductDiscount(command.SCItem, cancellationToken);
-        ShoppingCartItem SCItem = command.SCItem;
-        dbContext.SCartItem.Add(SCItem);
-
-        dbContext.SaveChanges();
-        ShoppingCart sc = await dbContext.SCart.FirstOrDefaultAsync(i => i.UserName=="skuser") ;
-        SCItem = dbContext.SCartItem.LastOrDefault();
-        if (sc == null)
+        ShoppingCartItem SCItem = await dbContext.SCartItem.FirstOrDefaultAsync(i => i.ProductId == command.SCItem.ProductId);
+        ShoppingCart SC = await dbContext.SCart.FirstOrDefaultAsync(i => i.UserName == "skuser");
+        if (SC == null)
         {
             ShoppingCart SCart = new ShoppingCart();
             SCart.UserName = "skuser";
-            SCart.Items.Add(SCItem.ProductId);
+            SCart.Items.Add(command.SCItem.ProductId);
             await dbContext.SCart.AddAsync(SCart);
+        }
+        if (SCItem != null)
+        {
+            SCItem.Quantity = SCItem.Quantity + command.SCItem.Quantity;
         }
         else
         {
-            sc.Items.Add(SCItem.ProductId);
+            SCItem = command.SCItem;
+            dbContext.SCartItem.Add(SCItem);
+            SC?.Items.Add(command.SCItem.ProductId);
         }
+
         dbContext.SaveChanges();
-        //await dbContext.SCart.AddAsync(command.SCItem);
+        //SCItem = dbContext.SCartItem.LastOrDefault();
+        //        else
+        //      {
+        //        SCart.Items.Add(SCItem.ProductId);
+        //  }
 
         return new StoreBasketResult("skuser");
     }
