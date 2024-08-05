@@ -3,12 +3,14 @@ import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { Product } from "../models/product";
 import { BasketItem } from "../../app/models/basket";
+import { Order } from "../../app/models/order";
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500))
 
 //axios.defaults.baseURL = 'https://localhost:7089/';
 const catlogBaseURL = 'https://localhost:7089/';
 const basketBaseURL = 'https://localhost:60668/';
+const orderBaseURL = 'https://localhost:7246/';
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -71,10 +73,25 @@ const Basket = {
     removeItem: (productId: number, quantity = 1) => requests.del(`basket?productId=${productId}&quantity=${quantity}`)
 }
 
+const Account = {
+    //login: (values: any) => requests.post('account/login', values),
+    //register: (values: any) => requests.post('account/register', values),
+    currentUser: () => requests.get('account/currentUser'),
+    fetchAddress: () => requests.get('account/savedAddress')
+}
+
+const Orders = {
+    list: () => requests.get('orders'),
+    fetch: (id: number) => requests.get(`orders/${id}`),
+    create: (orders2: Order) => requests.post(orderBaseURL +'order/add', orders2)
+}
+
 const agent = {
     Catalog,
     TestErrors,
-    Basket
+    Basket,
+    Account,
+    Orders
 }
 
 export default agent;
